@@ -19,3 +19,96 @@ body {
   color: $base-font-color;
   font-family: $base-font-family;
 }
+
+//-----------------Recipe List-----------------//
+
+.recipe-list {
+	@include outer-container();
+	padding: 0;
+	> * {
+		display: inline-block;
+	}
+	li {
+		@include span-columns(2.4);
+		height: 50px;
+		border: 1px solid black;
+		border-radius: 10px;
+		text-align: center;
+		&:last-of-type {
+			@include omega();
+		}
+		&:hover {
+			background-color: $light-gray;
+		}
+		h1 {
+			font-size: 20px;
+		}
+	}
+}
+
+//----------------Recipe-Detail----------------//
+
+.recipe-detail {
+	@include outer-container();
+	max-height: 500px;
+	background: white;	
+	border: 1px solid black;
+	border-radius: 5px;
+	h1 {
+		text-align: center;
+	}
+	ul {
+		column-gap: 20px;
+		column-count: 5;
+		li {
+			position: relative;
+			list-style: none;
+			> * {
+				display: inline-block;
+			}
+			input{
+				position: absolute;
+				margin-right: 5px;
+				top: 18px;
+				left: 0;
+			}
+			p {
+				width: 90%;
+				margin-left: 20px;
+			}
+		}
+	}
+}
+
+//---------------Recipe-Form-----------------//
+.recipe-form {
+	@include span-columns(6);
+	@include shift(3);
+	position: relative;
+	.recipe-name {
+		width: 80%;
+		margin-bottom: 20px;
+	}
+	.ingredient-input {
+		.name {
+			width: 50%;
+		}
+		.unit {
+			width: 15%;
+		}
+		.qty {
+			width: 15%;
+		}
+	}
+	.fa {
+		position: absolute;
+		font-size: 24px;
+		bottom: 42px;
+		right: 15%;
+	}
+	.submit {
+		width: 50%;
+		margin-left: 15%;
+		margin-top: 20px;
+	}
+}
