@@ -6,28 +6,63 @@ var RecipeList = React.createClass({
 		clickName: React.PropTypes.func.isRequired,
 	},
 
+	getInitialState() {
+		return {
+			search: ''
+		}
+	},
+
 	handleClick(e) {
 		this.props.clickName(e.target.textContent);
 	},
 
+	handleChange(e) {
+		this.setState({
+			search: e.target.value.trim().toLowerCase()
+		});
+	},
+
+	handleSearchClick() {
+		$('.search-box').toggleClass('active');
+	},
+
+	handleExpandClick() {
+		$('.recipes').toggleClass('expanded');
+		$('.fa-angle-double-down, .fa-angle-double-up').toggleClass('hidden');
+	},
+
 	render() {
-		console.log(this.props.recipes);
+		var recipes = this.props.recipes;
+		console.log(recipes);
+		// debugger;
+
+		recipes = recipes.filter((recipe) => {
+			return _.any(_.values(recipe), (value) => { 
+        return (typeof value == 'string' && value.trim().toLowerCase().indexOf(this.state.search) > -1)
+      }) || _.any(recipe.ingredients, (ingredient) => {
+      	return ingredient.name.trim().toLowerCase().indexOf(this.state.search) > -1
+      })
+    });
+
 		return (
-			<ul
-				className="recipe-list"  
-			>
-				{_.map(this.props.recipes, (object) => {
-					return (
-						<li
-						ref="something"
-						key={object.objectId}
-						onClick={this.handleClick}
-						>
-							<h1>{object.name}</h1>
-						</li>
-					)
-				})}
-			</ul>
+			<div className="recipe-list">
+				<ul className='recipes'>
+					{_.map(recipes, (object) => {
+						return (
+							<li
+							key={object.objectId}
+							onClick={this.handleClick}
+							>
+								<h1>{object.name}</h1>
+							</li>
+						)
+					})}
+				</ul>
+				<input className='search-box' type="text" onKeyUp={this.handleChange} placeholder='Search recipes or ingredients'/>
+				<i className="fa fa-search" onClick={this.handleSearchClick}></i>
+				<i className="fa fa-angle-double-down" onClick={this.handleExpandClick}></i>
+				<i className="fa fa-angle-double-up hidden" onClick={this.handleExpandClick}></i>
+			</div>
 		)
 	}
 });

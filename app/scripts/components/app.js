@@ -43,9 +43,6 @@ var App = React.createClass({
 							recipes={this.props.recipes}
 							clickName={this.props.clickName}
 						/>
-						<RecipeDetail
-							details={this.props.recipeDetail}>
-						</RecipeDetail>
 						<RecipeForm 
 							onSubmit={this.props.onSubmit} 
 							onAddIngredient={this.props.onAddIngredient}
@@ -54,6 +51,9 @@ var App = React.createClass({
 							onIngredientEdit={this.props.onIngredientEdit}
 							onNameEdit={this.props.onNameEdit}>
 						</RecipeForm>
+						<RecipeDetail
+							details={this.props.recipeDetail}>
+						</RecipeDetail>
 					</div>
 				);
 				break;

@@ -10,16 +10,6 @@ var RecipeForm = React.createClass({
 		ingredients: React.PropTypes.object.isRequired,
 	},
 
-	// handleSubmit(e) {
-	// 	e.preventDefault();
-	// 	this.props.onSubmit(this.refs.name.value, (_.pairs(this.refs.ingredientInput.state)));
-	// 	this.refs.ingredientInput.setState({
-	// 		ingredient: '',
-	// 		unit: '',
-	// 		quantity: '',
-	// 	});	
-	// },
-
 	handleSubmit(e) {
 		e.preventDefault();
 		this.props.onSubmit(this.refs.name.value);
@@ -40,26 +30,24 @@ var RecipeForm = React.createClass({
 	},
 
 	render() {
-		// var ingredients = []
-		// for(var i = 0; i < this.state.ingredients; i++) {
-		// 	ingredients.push(i);
-		// }	
 
 		return(
 			<form action="" onSubmit={this.handleSubmit} className='recipe-form'>
-				<h1>Add a New Recipe</h1>
-				<input type="text" placeholder="Recipe Name" className="recipe-name" ref='name' onChange={this.handleNameEdit} />
-				{this.props.ingredients.map((model, key) => {
-					return (
-						<IngredientInput 
-								ingredient={model}
-								handleIngredientEdit={this.handleIngredientEdit}
-								key={key}>
-						</IngredientInput>
-					)
-				})}
-				<i className="fa fa-plus-square-o" onClick={this.handleAddIngredient}></i>
-				<input type="submit" className='submit'/>
+				<div className='form-container'>
+					<h1>Add a New Recipe</h1>
+					<input type="text" placeholder="Recipe Name" className="recipe-name" ref='name' onChange={this.handleNameEdit} />
+					{this.props.ingredients.map((model, key) => {
+						return (
+							<IngredientInput 
+									ingredient={model}
+									handleIngredientEdit={this.handleIngredientEdit}
+									key={key}>
+							</IngredientInput>
+						)
+					})}
+					<i className="fa fa-plus-square-o" onClick={this.handleAddIngredient}></i>
+					<input type="submit" className='submit'/>
+				</div>
 			</form>
 		)
 	},

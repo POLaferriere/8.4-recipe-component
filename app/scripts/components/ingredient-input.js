@@ -29,7 +29,7 @@ var IngredientInput = React.createClass({
 				<input 
 					className='qty'
 					type="number" 
-					placeholder="quantity" 
+					placeholder="qty" 
 					value={this.props.ingredient.get('qty')}
 					onChange={this.handleEdit.bind(this, 'qty')}
 				/>

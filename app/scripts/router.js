@@ -33,12 +33,14 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	recipe(id) {
+		this.recipes.fetch().then(() => {
 		this.currentRoute = 'recipe';
-		var recipe = this.recipes.find((model => {
-			return model.get('objectId') === id
-		}))
-		this.recipeDetail = recipe;
-		this.renderApp();
+			var recipe = this.recipes.find((model) => {
+				return model.get('objectId') === id
+			})
+			this.recipeDetail = recipe;
+			this.renderApp();
+		})
 	},
 
 	onNameEdit(prop, newProp) {
